@@ -1,11 +1,12 @@
 <template>
   <div class="hello">
-    <mt-header title="软件信息管理">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header>
+    <Header :title="title"/>
+    <!--<mt-header title="软件信息管理">-->
+      <!--<router-link to="/" slot="left">-->
+        <!--<mt-button icon="back">返回</mt-button>-->
+      <!--</router-link>-->
+      <!--<mt-button icon="more" slot="right"></mt-button>-->
+    <!--</mt-header>-->
     <div class="img-top">
       <img class="img-auto" src="../assets/logo.png" alt="">
     </div>
@@ -21,10 +22,13 @@
 <script>
 
 
+import Header from './Header'
 export default {
   name: 'HelloWorld',
+  components: {Header},
   data () {
     return {
+      title:"软件信息管理",
       msg: 'Welcome to Your Vue.js App'
     }
   }
