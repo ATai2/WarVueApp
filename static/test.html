@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <p v-bind:title="title" v-if="seen">{{msg}}</p>
+<ol>
+  <li v-for="todo in todos">
+    {{ todo.text }}
+  </li>
+</ol>
+</div>
+
+
+<div id="app-5">
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">逆转消息</button>
+</div>
+</body>
+</html>
+
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello',
+      title: 'ydfksl' + new Date().toLocaleDateString(),
+      seen:true,
+      todos: [
+        { text: '学习 JavaScript' },
+        { text: '学习 Vue' },
+        { text: '整个牛项目' }
+      ]
+    }
+
+  })
+</script>

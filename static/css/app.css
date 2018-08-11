@@ -1,0 +1,18 @@
+.bgcolor{
+  background-color: #4E74BB;
+}
+.mint-header , .mint-button--primary{
+  background-color: #4E74BB;
+}
+
+.mint-cell-wrapper{
+  text-align: left;
+  margin-left: 0px;
+}
+
+/*.main-color .mint-cell-wrapper{*/
+  /*background-color: aquamarine;*/
+/*}*/
+/*.main-color .mint-field-core{*/
+  /*background-color: aquamarine;*/
+/*}*/
