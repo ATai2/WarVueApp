@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import AddInfo from '@/components/AddInfo'
 import MyRelease from '@/components/MyRelease'
 import SumInfos from '@/components/SumInfos'
+import SelectPage from '@/components/SelectPage'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/suminfos',
       name: 'SumInfos',
       component: SumInfos
+    },
+    {
+      path: '/select/:id',
+      name: 'SelectPage',
+      component: SelectPage
     }
   ]
 })

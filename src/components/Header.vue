@@ -1,5 +1,5 @@
 <template>
-  <mt-header class="bgcolor" title="标题过长会隐藏后面的内容啊哈哈哈哈">
+  <mt-header class="bgcolor" :title="title">
     <router-link to="/" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
@@ -9,7 +9,8 @@
 
 <script>
   export default {
-    name: 'Header'
+    name: 'Header',
+    props:["title"]
   }
 </script>
 
