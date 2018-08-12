@@ -12,12 +12,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import App from './App'
 import router from './router'
-// import store from './store/WarStore'
+import store from './store/store'
 
-// import BootstrapVue from 'bootstrap-vue'
 
-// Vue.use(BootstrapVue);
-// Vue.use(Vuex)
 Vue.use(MintUI)
 Vue.use(ElementUI);
 
@@ -28,7 +25,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  // store,
+  store,
   render: h => h(App),
   components: { App },
   template: '<App/>'

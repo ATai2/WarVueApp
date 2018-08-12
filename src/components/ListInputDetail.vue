@@ -3,7 +3,7 @@
     <el-card class="box-card info-color" >
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item v-for=" (adItem, index)  in items" :title="adItem.title" :name="adItem.name" :key="adItem.key">
-          <InputDetail ref="sonData[{{index}}]" :dbItem="dbItem"/>
+          <InputDetail ref="sonData[{{index}}]" :dbItem="dbItem" :listId="adItem.key"/>
         </el-collapse-item>
       </el-collapse>
     </el-card>
@@ -24,6 +24,9 @@
         activeNames: ['明细1'],
         inputList:[]
       }
+    },
+    watch:{
+
     },
     methods: {
       handleChange (val) {

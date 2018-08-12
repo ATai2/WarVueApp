@@ -1,6 +1,6 @@
 <template>
   <div class="page-cell">
-    <div v-on:click="seen1" v-on:closepop="closepop">
+    <div v-on:click="seen1" v-on:closepop="closepop" >
       <mt-cell title="试飞科目*" :label="item.subject" is-link></mt-cell>
     </div>
 
@@ -40,7 +40,7 @@
   export default {
     name: 'InputDetail',
     components: {SelectPage},
-    props: ['dbItem'],
+    props: ['dbItem','listId'],
     data () {
       return {
         item: {
@@ -60,6 +60,18 @@
         endportpopupVisible: false,
         politpopupVisible: false,
         engineerpopupVisible: false,
+      }
+    },
+    watch:{
+      item: {
+        handler(newValue, oldValue) {
+          console.log(newValue)
+          console.log(this.listId)
+          var key="key"+this.listId
+          // this.$store.state.addList[key]=this.item
+          this.$store.commit('updateItem', this.item)
+        },
+        deep: true
       }
     },
     methods: {
