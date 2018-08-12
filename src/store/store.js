@@ -22,8 +22,8 @@ const mutations = {
   decrement (state) {
     state.count--
   },
-  updateItem (key, item) {
-    state.addList[key] = item
+  updateItem (state,item) {
+    state.addList[item.key] = item
   }
 }
 

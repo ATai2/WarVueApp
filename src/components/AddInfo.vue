@@ -3,15 +3,15 @@
     <Header :title="headtitle"/>
     <MainTable ref="mainData"/>
     <!--<InputDetail :dbItem="dbItem"/>-->
-    <ListInputDetail :items="items" :dbItem="dbItem" ref="inputList"/>
+    <ListInputDetail :items="items" :dbItem="dbItem"/>
     <!--<mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>-->
     <!--<mt-button size="large" type="primary" class="addbtn">提交</mt-button>-->
     <!--<SelectPage/>-->
 
-    <button v-on:click="getMainData">getMainData</button>
+    <!--<button v-on:click="getMainData">getMainData</button>-->
     <!--<ListInputDetail :items="items"  :dbItem="dbItem"/>-->
-    <!--<mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>-->
-    <!--<mt-button size="large" type="primary" class="addbtn">提交</mt-button>-->
+    <mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>
+    <mt-button size="large" type="primary" class="addbtn">提交</mt-button>
 
   </div>
 </template>

@@ -65,8 +65,9 @@
     watch:{
       item: {
         handler(newValue, oldValue) {
-          console.log(newValue)
+          console.log("watch item")
           console.log(this.listId)
+          this.item.key=this.listId
           var key="key"+this.listId
           // this.$store.state.addList[key]=this.item
           this.$store.commit('updateItem', this.item)
