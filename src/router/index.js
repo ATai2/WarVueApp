@@ -5,6 +5,8 @@ import AddInfo from '@/components/AddInfo'
 import MyRelease from '@/components/MyRelease'
 import SumInfos from '@/components/SumInfos'
 import SelectPage from '@/components/SelectPage'
+import CardMainInfo from '@/components/CardMainInfo'
+import TimeLine from '@/components/TimeLine'
 
 Vue.use(Router)
 
@@ -34,6 +36,21 @@ export default new Router({
       path: '/select/:id',
       name: 'SelectPage',
       component: SelectPage
+    }
+
+
+
+    //demo
+    ,
+    {
+      path: '/card',
+      name: 'card',
+      component: CardMainInfo
+    },
+    {
+      path: '/timeline',
+      name: 'timeline',
+      component: TimeLine
     }
   ]
 })

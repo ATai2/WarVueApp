@@ -6,11 +6,11 @@
 
     <div class="page-cell borderdiv">
       <div  class="main-text mint-field"><span>主表信息:</span></div>
-      <mt-field v-model="addInfoTime" placeholder="请输入8位数字日期" label="日期*" :attr="{ maxlength: 8 }"></mt-field>
+      <mt-field v-model="fd.addInfoTime" placeholder="请输入8位数字日期" label="日期*" :attr="{ maxlength: 8 }"></mt-field>
       <div v-on:click="seenAirType" v-on:closepop="closepop">
         <mt-cell title="飞机型号*" :label="fd.addAirType" is-link></mt-cell>
       </div>
-      <div v-on:click="seenAirNum" v-on:closepop="closepop">
+      <div v-on:click="seenAirNum" v-on:closepop="closepop2">
         <mt-cell title="驾机号*" :label="fd.addAirNum" is-link></mt-cell>
       </div>
     </div>
@@ -35,9 +35,6 @@
           addAirType:"请点击选择",
           addAirNum:"请点击选择"
         },
-
-
-
         airTypepopupVisible: false,
         airNumpopupVisible: false,
         value1: 'sdfa',

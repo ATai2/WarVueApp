@@ -1,12 +1,7 @@
 <template>
   <div class="hello">
     <Header :title="title"/>
-    <!--<mt-header title="软件信息管理">-->
-      <!--<router-link to="/" slot="left">-->
-        <!--<mt-button icon="back">返回</mt-button>-->
-      <!--</router-link>-->
-      <!--<mt-button icon="more" slot="right"></mt-button>-->
-    <!--</mt-header>-->
+
     <div class="img-top">
       <img class="img-auto" src="../assets/logo.png" alt="">
     </div>
