@@ -7,6 +7,7 @@ import SumInfos from '@/components/SumInfos'
 import SelectPage from '@/components/SelectPage'
 import CardMainInfo from '@/components/CardMainInfo'
 import TimeLine from '@/components/TimeLine'
+// import ReceiveInfos from '@/components/ReceiveInfos'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/suminfos',
       name: 'SumInfos',
       component: SumInfos
+    },
+    {
+      path: '/receriveinfos',
+      name: 'MyReceiver',
+      component: CardMainInfo
     },
     {
       path: '/select/:id',

@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <!--<el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">-->
-    <el-card v-for="c in list" :body-style="{ padding: '0px' }">
+    <el-card v-for="c in list" :body-style="{ padding: '0px' }" :key="c.key">
       <!--<img src="~examples/assets/images/hamburger.png" class="image">-->
       <div style="padding: 14px;" class="info">
 
@@ -31,7 +31,8 @@
     data () {
       return {
         list:[{date:"20180202",aircraftType:"ccc",aircraftNum:"222"}],
-        currentDate: new Date()
+        currentDate: new Date(),
+        key:1
       }
     }
   }

@@ -1,10 +1,12 @@
 <template>
   <div class="page-cell">
-    <el-collapse v-model="activeNames" @change="handleChange">
-      <el-collapse-item v-for="adItem in items" :title="adItem.title" :name="adItem.name" :key="adItem.key">
-        <InputDetail ref="sonData" />
-      </el-collapse-item>
-    </el-collapse>
+    <el-card class="box-card info-color" >
+      <el-collapse v-model="activeNames" @change="handleChange">
+        <el-collapse-item v-for=" (adItem, index)  in items" :title="adItem.title" :name="adItem.name" :key="adItem.key">
+          <InputDetail ref="sonData[{{index}}]" :dbItem="dbItem"/>
+        </el-collapse-item>
+      </el-collapse>
+    </el-card>
   </div>
 </template>
 
@@ -15,10 +17,12 @@
   export default {
     name: 'ListInputDetail',
     components: {InputDetail, SelectPage},
-    props: ['items', 'dtName'],
+    props: ['items', 'dbItem'],
+
     data () {
       return {
-
+        activeNames: ['明细1'],
+        inputList:[]
       }
     },
     methods: {
@@ -27,10 +31,17 @@
       }
     },
     created () {
+      console.log('list create')
     }
   }
 </script>
 
 <style scoped>
-
+  .info-color {
+    align-content: center;
+    width: 98%;
+    margin: 0 auto;
+    padding: 0 !important;
+    /*background-color: #F6FEFF;*/
+  }
 </style>

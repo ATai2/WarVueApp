@@ -1,5 +1,5 @@
 <template>
-  <div class="img-top">
+  <div class="img-top" >
     <img class="img-auto" src="./imgs/imgbox1.jpg" alt="">
   </div>
 

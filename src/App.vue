@@ -21,4 +21,11 @@
     color: #2c3e50;
     /*margin-top: 60px;*/
   }
+  body{
+    margin: 0;
+  }
+
+  .el-card__body{
+    padding: 0;
+  }
 </style>

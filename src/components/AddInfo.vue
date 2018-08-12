@@ -1,12 +1,18 @@
 <template>
   <div>
     <Header :title="headtitle"/>
-    <MainTable/>
+    <MainTable ref="mainData"/>
     <!--<InputDetail :dbItem="dbItem"/>-->
-    <ListInputDetail :items="items"  :dbItem="dbItem"/>
-    <mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>
-    <mt-button size="large" type="primary" class="addbtn">提交</mt-button>
+    <ListInputDetail :items="items" :dbItem="dbItem" ref="inputList"/>
+    <!--<mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>-->
+    <!--<mt-button size="large" type="primary" class="addbtn">提交</mt-button>-->
     <!--<SelectPage/>-->
+
+    <button v-on:click="getMainData">getMainData</button>
+    <!--<ListInputDetail :items="items"  :dbItem="dbItem"/>-->
+    <!--<mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>-->
+    <!--<mt-button size="large" type="primary" class="addbtn">提交</mt-button>-->
+
   </div>
 </template>
 
@@ -71,11 +77,14 @@
     },
     components: {ListInputDetail, InputDetail, SelectPage, MainTable, Header},
     methods: {
-      addDetailInfo(){
-        var size=this.items.length
+      addDetailInfo () {
+        var size = this.items.length
         console.log(this.items.length)
-        this.items.push({key:size+1,title:"明细"+(size+1)})
+        this.items.push({key: size + 1, title: '明细' + (size + 1)})
         // this.
+      },
+      getMainData(){
+        console.log('get main data')
       },
       handleChange (val) {
         console.log(val)
