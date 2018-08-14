@@ -39,8 +39,8 @@
       return {
         fd:{
           aircraftNum:"",
-          aircraftType:"请点击选择",
-          date:"请点击选择"
+          aircraftType:"",
+          date:""
         },
 
         airTypepopupVisible: false,

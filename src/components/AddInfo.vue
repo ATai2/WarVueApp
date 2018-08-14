@@ -93,16 +93,31 @@
 
       },
       submitDatas(){
+        console.log("submit")
         let mainData = this.$refs.mainData.fd
+
+        for (var key in mainData){
+          if (mainData[key] == '') {
+
+          }
+        }
         // console.log(mainData)
         let addListMap = this.$store.state.addList
         let addList=[]
         for(var key in addListMap){
           addList.push(addListMap[key])
         }
-        // console.log(addList)
 
-        // state.addList
+        for (let i = 0; i < addList.length; i++) {
+          let addListElement = addList[i]
+          for (var key in addListElement){
+            if (addListElement[key] == '') {
+              console.log(key)
+            }
+            console.log(addListElement[key])
+          }
+
+        }
 
         axios.post(Global.serverSrc +'/fly/info/create/batch',{
           flyInfoMain:mainData,

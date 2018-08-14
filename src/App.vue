@@ -28,4 +28,10 @@
   .el-card__body{
     padding: 0;
   }
+
+  .mint-cell-label{
+    display: inline;
+    font-size: 1rem;
+    margin-left: 2rem;
+  }
 </style>
