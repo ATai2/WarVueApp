@@ -6,10 +6,10 @@
 
     <mt-field label="起飞时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.takeOffTime"></mt-field>
     <mt-field label="着陆时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.landingTime"></mt-field>
-    <div v-on:click="seen2" v-on:closepop="closepop">
+    <div v-on:click="seen2" v-on:closepop="closepop2">
       <mt-cell title="起飞机场*" :label="item.takeOffAirport" is-link></mt-cell>
     </div>
-    <div v-on:click="seen3" v-on:closepop="closepop">
+    <div v-on:click="seen3" v-on:closepop="closepop3">
       <mt-cell title="着陆机场*" :label="item.landingAirport" is-link></mt-cell>
     </div>
 
@@ -17,19 +17,19 @@
     <mt-field label="开关车实验时间*" placeholder="请输入" :attr="{ maxlength: 8 }" :text="item.turnOnAndOffTime"></mt-field>
     <mt-field label="完成实验点数*" placeholder="请输入" :attr="{ maxlength: 8 }" :text="item.points"></mt-field>
 
-    <div v-on:click="seen4" v-on:closepop="closepop">
+    <div v-on:click="seen4" v-on:closepop="closepop4">
       <mt-cell title="试飞员*" :label="item.pilot" is-link></mt-cell>
     </div>
 
-    <div v-on:click="seen5" v-on:closepop="closepop">
+    <div v-on:click="seen5" v-on:closepop="closepop5">
       <mt-cell title="试飞工程师*" :label="item.engineer" is-link></mt-cell>
     </div>
 
     <SelectPage :datalist="dbItem.subjectlist" :popupVisible="subjectpopupVisible" @closepage="closepop"/>
-    <SelectPage :datalist="dbItem.startportlist" :popupVisible="startportpopupVisible" @closepage="closepop2"/>
-    <SelectPage :datalist="dbItem.endportlist" :popupVisible="endportpopupVisible" @closepage="closepop3"/>
-    <SelectPage :datalist="dbItem.politlist" :popupVisible="politpopupVisible" @closepage="closepop4"/>
-    <SelectPage :datalist="dbItem.engineerlist" :popupVisible="engineerpopupVisible" @closepage="closepop5"/>
+    <SelectPage :datalist="dbItem.airport" :popupVisible="startportpopupVisible" @closepage="closepop2"/>
+    <SelectPage :datalist="dbItem.airport" :popupVisible="endportpopupVisible" @closepage="closepop3"/>
+    <SelectPage :datalist="dbItem.pilot" :popupVisible="politpopupVisible" @closepage="closepop4"/>
+    <SelectPage :datalist="dbItem.engineer" :popupVisible="engineerpopupVisible" @closepage="closepop5"/>
 
   </div>
 </template>

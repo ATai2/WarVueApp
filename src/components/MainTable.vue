@@ -10,20 +10,20 @@
       <!--</div>-->
       <div class="page-cell">
         <div  class="main-text"><span>主表信息:</span></div>
-        <mt-field v-model="fd.aircraftNum" placeholder="请输入8位数字日期" label="日期*" :attr="{ maxlength: 8 }"></mt-field>
+        <mt-field v-model="fd.flyDate" placeholder="请输入8位数字日期" label="日期*"  :attr="{ maxlength: 8 }"></mt-field>
         <div v-on:click="seenAirType" v-on:closepop="closepop">
           <mt-cell title="飞机型号*" :label="fd.aircraftType" is-link></mt-cell>
         </div>
         <div v-on:click="seenAirNum" v-on:closepop="closepop2">
-          <mt-cell title="驾机号*" :label="fd.date" is-link></mt-cell>
+          <mt-cell title="驾机号*" :label="fd.aircraftNum" is-link></mt-cell>
         </div>
       </div>
     </el-card>
 
 
     <!--<InputDetail/>-->
-    <SelectPage :datalist="airTypelist" :popupVisible="airTypepopupVisible" @closepage="closepop"/>
-    <SelectPage :datalist="airNumlist" :popupVisible="airNumpopupVisible" @closepage="closepop2"/>
+    <SelectPage :datalist="dbItem.aircraftType" :popupVisible="airTypepopupVisible" @closepage="closepop"/>
+    <SelectPage :datalist="dbItem.aircraftNum" :popupVisible="airNumpopupVisible" @closepage="closepop2"/>
 
   </div>
 </template>
@@ -34,13 +34,14 @@
 
   export default {
     name: 'MainTable',
+    props:['dbItem'],
     components: {SelectPage, InputDetail},
     data () {
       return {
         fd:{
           aircraftNum:"",
           aircraftType:"",
-          date:""
+          flyDate:""
         },
 
         airTypepopupVisible: false,
@@ -64,7 +65,7 @@
       },
       closepop2 (val) {
         this.airNumpopupVisible = false
-        this.fd.date=val
+        this.fd.aircraftNum=val
       }
     },
     created () {
