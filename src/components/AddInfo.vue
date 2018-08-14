@@ -3,7 +3,7 @@
     <Header :title="headtitle"/>
     <MainTable ref="mainData"/>
     <!--<InputDetail :dbItem="dbItem"/>-->
-    <ListInputDetail :items="items" :dbItem="dbItem"/>
+    <ListInputDetail :items="items" :dbItem="dbItem" v-on:delInputInfo="delInputInfo"/>
     <!--<mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>-->
     <!--<mt-button size="large" type="primary" class="addbtn">提交</mt-button>-->
     <!--<SelectPage/>-->
@@ -77,6 +77,11 @@
     },
     components: {ListInputDetail, InputDetail, SelectPage, MainTable, Header},
     methods: {
+      delInputInfo(index){
+        console.log("del addinfo "+ index)
+        this.items.splice(index,1)
+        console.log('get main end')
+      },
       addDetailInfo () {
         var size = this.items.length
         console.log(this.items.length)
@@ -85,6 +90,7 @@
       },
       getMainData(){
         console.log('get main data')
+
       },
       submitDatas(){
         let mainData = this.$refs.mainData.fd

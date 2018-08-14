@@ -4,6 +4,7 @@
       <el-collapse v-model="activeNames" @change="handleChange">
         <el-collapse-item v-for=" (adItem, index)  in items" :title="adItem.title" :name="adItem.name" :key="adItem.key">
           <InputDetail ref="sonData[{{index}}]" :dbItem="dbItem" :listId="adItem.key"/>
+          <mt-button @click="delinfo(index)">删除</mt-button>
         </el-collapse-item>
       </el-collapse>
     </el-card>
@@ -29,6 +30,11 @@
 
     },
     methods: {
+      delinfo(index){
+        console.log("del "+index)
+        // this.inputList.splice(index,1)
+        this.$emit('delInputInfo',index)
+      },
       handleChange (val) {
         console.log(val)
       }
