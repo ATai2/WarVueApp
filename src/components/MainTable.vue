@@ -10,12 +10,12 @@
       <!--</div>-->
       <div class="page-cell">
         <div  class="main-text"><span>主表信息:</span></div>
-        <mt-field v-model="fd.addInfoTime" placeholder="请输入8位数字日期" label="日期*" :attr="{ maxlength: 8 }"></mt-field>
+        <mt-field v-model="fd.aircraftNum" placeholder="请输入8位数字日期" label="日期*" :attr="{ maxlength: 8 }"></mt-field>
         <div v-on:click="seenAirType" v-on:closepop="closepop">
-          <mt-cell title="飞机型号*" :label="fd.addAirType" is-link></mt-cell>
+          <mt-cell title="飞机型号*" :label="fd.aircraftType" is-link></mt-cell>
         </div>
         <div v-on:click="seenAirNum" v-on:closepop="closepop2">
-          <mt-cell title="驾机号*" :label="fd.addAirNum" is-link></mt-cell>
+          <mt-cell title="驾机号*" :label="fd.date" is-link></mt-cell>
         </div>
       </div>
     </el-card>
@@ -38,15 +38,16 @@
     data () {
       return {
         fd:{
-          addInfoTime:"",
-          addAirType:"请点击选择",
-          addAirNum:"请点击选择"
+          aircraftNum:"",
+          aircraftType:"请点击选择",
+          date:"请点击选择"
         },
+
         airTypepopupVisible: false,
         airNumpopupVisible: false,
         value1: 'sdfa',
         airTypelist: ['a', 'b', 'c'],
-        airNumlist: ['ksldk', 'lkdjfls', 'ksldk', 'lkdjfls', 'ksldk', 'lkdjfls', 'ksldk', 'lkdjfls', 'ksldk', 'lkdjfls']
+        airNumlist: ['ksldk', 'lkdjfls']
       }
     },
     methods: {
@@ -59,11 +60,11 @@
       closepop (val) {
         this.airTypepopupVisible = false
         console.log(val)
-        this.fd.addAirType=val
+        this.fd.aircraftType=val
       },
       closepop2 (val) {
         this.airNumpopupVisible = false
-        this.fd.addAirNum=val
+        this.fd.date=val
       }
     },
     created () {

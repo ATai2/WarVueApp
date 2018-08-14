@@ -1,5 +1,5 @@
 <script>
-  const serverSrc = 'http://localhost:9999/'
+  const serverSrc = 'http://localhost:9999'
   const token = '12345678'
   const hasEnter = false
   const userSite = '中国钓鱼岛'

@@ -51,7 +51,7 @@
     created () {
       this.openIndicator()
       console.log("home created")
-      setTimeout("alert('对不起, 要你久候')", 3000 )
+      // setTimeout("alert('对不起, 要你久候')", 3000 )
     },
     beforeDestroy() {
       // Indicator.close();

@@ -4,21 +4,21 @@
       <mt-cell title="试飞科目*" :label="item.subject" is-link></mt-cell>
     </div>
 
-    <mt-field label="起飞时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.startFlyTime"></mt-field>
-    <mt-field label="着陆时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.landTime"></mt-field>
+    <mt-field label="起飞时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.takeOffTime"></mt-field>
+    <mt-field label="着陆时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.landingTime"></mt-field>
     <div v-on:click="seen2" v-on:closepop="closepop">
-      <mt-cell title="起飞机场*" :label="item.flyAirPort" is-link></mt-cell>
+      <mt-cell title="起飞机场*" :label="item.takeOffAirport" is-link></mt-cell>
     </div>
     <div v-on:click="seen3" v-on:closepop="closepop">
-      <mt-cell title="着陆机场*" :label="item.landAirPort" is-link></mt-cell>
+      <mt-cell title="着陆机场*" :label="item.landingAirport" is-link></mt-cell>
     </div>
 
-    <mt-cell title="空中飞行时间*" :label="item.flyTime" ></mt-cell>
-    <mt-field label="开关车实验时间*" placeholder="请输入" :attr="{ maxlength: 8 }" :text="item.testTime"></mt-field>
-    <mt-field label="完成实验点数*" placeholder="请输入" :attr="{ maxlength: 8 }" :text="item.testPoint"></mt-field>
+    <mt-cell title="空中飞行时间*" :label="item.flightTime" ></mt-cell>
+    <mt-field label="开关车实验时间*" placeholder="请输入" :attr="{ maxlength: 8 }" :text="item.turnOnAndOffTime"></mt-field>
+    <mt-field label="完成实验点数*" placeholder="请输入" :attr="{ maxlength: 8 }" :text="item.points"></mt-field>
 
     <div v-on:click="seen4" v-on:closepop="closepop">
-      <mt-cell title="试飞员*" :label="item.polit" is-link></mt-cell>
+      <mt-cell title="试飞员*" :label="item.pilot" is-link></mt-cell>
     </div>
 
     <div v-on:click="seen5" v-on:closepop="closepop">
@@ -45,14 +45,14 @@
       return {
         item: {
           subject: '',
-          startFlyTime: '',
-          landTime: '',
-          flyAirPort: '',
-          landAirPort: '',
-          flyTime: '',
-          polit: '',
-          testTime: '',
-          testPoint: '',
+          takeOffTime: '',
+          landingTime: '',
+          takeOffAirport: '',
+          landingAirport: '',
+          flightTime: '',
+          pilot: '',
+          turnOnAndOffTime: '',
+          points: '',
           engineer: '',
         },
         subjectpopupVisible: false,
@@ -98,15 +98,15 @@
       },
       closepop2 (val) {
         this.startportpopupVisible = false
-        this.item.flyAirPort = val
+        this.item.takeOffAirport = val
       },
       closepop3 (val) {
         this.endportpopupVisible = false
-        this.item.landAirPort = val
+        this.item.landingAirport = val
       },
       closepop4 (val) {
         this.politpopupVisible = false
-        this.item.polit = val
+        this.item.pilot = val
       },
       closepop5 (val) {
         this.engineerpopupVisible = false

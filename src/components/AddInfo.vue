@@ -11,7 +11,7 @@
     <!--<button v-on:click="getMainData">getMainData</button>-->
     <!--<ListInputDetail :items="items"  :dbItem="dbItem"/>-->
     <mt-button plain size="large" v-on:click="addDetailInfo">添加明细表</mt-button>
-    <mt-button size="large" type="primary" class="addbtn">提交</mt-button>
+    <mt-button size="large" type="primary" class="addbtn" @click="submitDatas">提交</mt-button>
 
   </div>
 </template>
@@ -86,6 +86,29 @@
       getMainData(){
         console.log('get main data')
       },
+      submitDatas(){
+        let mainData = this.$refs.mainData.fd
+        // console.log(mainData)
+        let addListMap = this.$store.state.addList
+        let addList=[]
+        for(var key in addListMap){
+          addList.push(addListMap[key])
+        }
+        // console.log(addList)
+
+        // state.addList
+
+        axios.post(Global.serverSrc +'/fly/info/create/batch',{
+          flyInfoMain:mainData,
+          flyInfoDetailList:addList
+        })
+          .then(function(res){
+            console.log(res);
+          })
+          .catch(function(err){
+            console.log(err);
+          })
+      },
       handleChange (val) {
         console.log(val)
       }
@@ -96,7 +119,7 @@
       console.log(Global.serverSrc)
       axios({
         method: 'get',
-        url: Global.serverSrc + 'demo/flytype'
+        url: Global.serverSrc + '/demo/flytype'
       }).then(function (resp) {
         console.log(resp.data)
       }).catch(resp => {

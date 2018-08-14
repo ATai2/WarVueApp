@@ -7,6 +7,8 @@ import SumInfos from '@/components/SumInfos'
 import SelectPage from '@/components/SelectPage'
 import CardMainInfo from '@/components/CardMainInfo'
 import TimeLine from '@/components/TimeLine'
+import ListPullView from '@/components/ListPullView'
+import DetailInfoPage from '@/components/DetailInfoPage'
 // import ReceiveInfos from '@/components/ReceiveInfos'
 
 Vue.use(Router)
@@ -42,6 +44,22 @@ export default new Router({
       path: '/select/:id',
       name: 'SelectPage',
       component: SelectPage
+    }    ,
+    {
+      path: '/listpull',
+      name: 'ListPullView',
+      component: ListPullView
+    }    ,
+    {
+      path: '/cardlist',
+      name: 'CardMainInfo',
+      component: CardMainInfo
+    }
+   ,
+    {
+      path: '/detailpage',
+      name: 'DetailInfoPage',
+      component: DetailInfoPage
     }
 
 
