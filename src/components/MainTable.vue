@@ -10,7 +10,10 @@
       <!--</div>-->
       <div class="page-cell">
         <div  class="main-text"><span>主表信息:</span></div>
-        <mt-field v-model="fd.flyDate" placeholder="请输入8位数字日期" label="日期*"  :attr="{ maxlength: 8 }"></mt-field>
+        <div v-on:click="open('picker')" v-on:closepop="closepop">
+          <mt-cell title="日期*" :label="fd.flyDate" is-link></mt-cell>
+        </div>
+        <!--<mt-field v-model="fd.flyDate" placeholder="请输入8位数字日期" label="日期*"  :attr="{ maxlength: 8 }"></mt-field>-->
         <div v-on:click="seenAirType" v-on:closepop="closepop">
           <mt-cell title="飞机型号*" :label="fd.aircraftType" is-link></mt-cell>
         </div>
@@ -25,12 +28,26 @@
     <SelectPage :datalist="dbItem.aircraftType" :popupVisible="airTypepopupVisible" @closepage="closepop"/>
     <SelectPage :datalist="dbItem.aircraftNum" :popupVisible="airNumpopupVisible" @closepage="closepop2"/>
 
+
+    <mt-datetime-picker
+      ref="picker"
+      type="date"
+      v-model="value"
+      year-format="{value} 年"
+      month-format="{value} 月"
+      date-format="{value} 日"
+      @confirm="handleChange">
+    </mt-datetime-picker>
   </div>
 </template>
 
 <script>
   import InputDetail from './InputDetail'
   import SelectPage from './SelectPage'
+  import {
+    Indicator,
+    Toast
+  } from 'mint-ui';
 
   export default {
     name: 'MainTable',
@@ -38,6 +55,7 @@
     components: {SelectPage, InputDetail},
     data () {
       return {
+        value:'2018-08-08',
         fd:{
           aircraftNum:"",
           aircraftType:"",
@@ -52,6 +70,17 @@
       }
     },
     methods: {
+      open(picker) {
+        this.$refs[picker].open();
+      },
+      handleChange(value) {
+        console.log(value)
+        this.fd.flyDate=value.getFullYear()+'-'+(value.getMonth()+1)+'-'+(value.getDate())
+        // Toast({
+        //   message: '已选择 ' + value.toString(),
+        //   position: 'bottom'
+        // });
+      },
       seenAirType () {
         this.airTypepopupVisible = !this.airTypepopupVisible
       },
@@ -69,7 +98,8 @@
       }
     },
     created () {
-
+        let dt=new Date()
+        this.value=dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate()
     }
   }
 </script>

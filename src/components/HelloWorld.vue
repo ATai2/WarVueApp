@@ -29,6 +29,10 @@
 <script>
 
   import Header from './Header'
+  import {
+    Indicator,
+    Toast
+  } from 'mint-ui';
 
   export default {
     name: 'HelloWorld',
@@ -43,9 +47,13 @@
     },
     methods: {
       openIndicator () {
-        // Indicator.open()
-        setTimeout( 2000)
+        Indicator.open({
+          text: '正在加载中',
+          spinnerType: 'snake'
+        })
+        setTimeout(()=>{  Indicator.close()}, 2000)
         this.canSee = 'block'
+
       },
     },
     created () {
@@ -54,7 +62,7 @@
       // setTimeout("alert('对不起, 要你久候')", 3000 )
     },
     beforeDestroy() {
-      // Indicator.close();
+      Indicator.close();
     }
   }
 </script>

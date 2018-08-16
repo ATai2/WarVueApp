@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--<HeaderToLast/>-->
     <Header :title="headtitle"/>
     <MainTable ref="mainData" :dbItem="dbItem"/>
     <ListInputDetail :items="items" :dbItem="dbItem" v-on:delInputInfo="delInputInfo"/>
@@ -16,6 +17,12 @@
   import Global from './Global'
   import InputDetail from './InputDetail'
   import ListInputDetail from './ListInputDetail'
+  import {
+    Indicator,
+    Toast
+  } from 'mint-ui';
+  import HeaderToLast from './HeaderToLast'
+
 
   export default {
     name: 'AddInfo',
@@ -66,7 +73,7 @@
         }]
       }
     },
-    components: {ListInputDetail, InputDetail, SelectPage, MainTable, Header},
+    components: {HeaderToLast, ListInputDetail, InputDetail, SelectPage, MainTable, Header},
     methods: {
       delInputInfo (index) {
         console.log('del addinfo ' + index)
@@ -89,7 +96,7 @@
 
         for (var key in mainData) {
           if (mainData[key] == '') {
-
+            console.log(key)
           }
         }
         // console.log(mainData)
@@ -105,20 +112,44 @@
             if (addListElement[key] == '') {
               console.log(key)
             }
+            if (key == 'takeOffTime' || key == 'landingTime') {
+              addListElement[key]+=':00'
+            }
             console.log(addListElement[key])
           }
 
         }
 
+        console.log({
+          flyInfoMain: mainData,
+          flyInfoDetailList: addList
+        })
+
+        Indicator.open({
+          text: '正在提交表单',
+          spinnerType: 'snake'
+        })
         axios.post(Global.serverSrc + '/fly/info/create/batch', {
           flyInfoMain: mainData,
           flyInfoDetailList: addList
         })
           .then(function (res) {
             console.log(res)
+            Indicator.close();
+
+            Toast({
+              message: '表单提交成功',
+              position: 'bottom'
+            });
+            this.$router.go(-1)
           })
           .catch(function (err) {
             console.log(err)
+            Indicator.close();
+            Toast({
+              message: '表单提交失败',
+              position: 'bottom'
+            });
           })
       },
       handleChange (val) {

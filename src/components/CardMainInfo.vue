@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="headtitle"/>
+    <!--<Header :title="headtitle"/>-->
 
     <el-row>
       <!--<el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">-->
@@ -40,11 +40,10 @@
   export default {
     name: 'CardMainInfo',
     components: {Header},
-    // props:['c'],
+    props:['list'],
     data () {
       return {
         headtitle:"我发布的",
-        list: []
       }
       //   c:{date:"20180202",aircraftType:"ccc",aircraftNum:"222"},
       //   currentDate: new Date(),
@@ -57,19 +56,19 @@
       }
     },
     created () {
-      let that = this
-      axios.get(Global.serverSrc + '/userPublish/all')
-        .then(function (response) {
-          console.log(response)
-          if (response.data.code == 0) {
-            that.list = response.data.data
-          }
-          console.log('sss')
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-      console.log('sss')
+      // let that = this
+      // axios.get(Global.serverSrc + '/userPublish/all')
+      //   .then(function (response) {
+      //     console.log(response)
+      //     if (response.data.code == 0) {
+      //       that.list = response.data.data
+      //     }
+      //     console.log('sss')
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error)
+      //   })
+      // console.log('sss')
     }
   }
 </script>

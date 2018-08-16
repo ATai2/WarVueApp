@@ -34,4 +34,11 @@
     font-size: 1rem;
     margin-left: 2rem;
   }
+
+  .el-message-box {
+    width: 85% !important;
+  }
+  .el-message-box--center {
+    width: 85% !important;
+  }
 </style>
