@@ -1,12 +1,37 @@
 <template>
   <div class="page-loadmore">
-    <h1 class="page-title">Pull up</h1>
-    <p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>
-    <p class="page-loadmore-desc">此例请使用手机查看</p>
+    <Header :title="headtitle"/>
+
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
       <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded"
                    ref="loadmore">
-        <CardMainInfo :list="list"/>
+        <ul class="page-loadmore-list">
+          <li v-for="c in list" class="page-loadmore-listitem">
+            <el-row>
+              <el-card :body-style="{ padding: '0px' }" :key="c.key">
+                <div style="padding: 14px;" class="info">
+                  <div class="row">
+                    日期: <span>{{c.flyInfoMain.date}}</span>
+                  </div>
+                  <div class="row">
+                    飞机型号: <span>{{c.flyInfoMain.aircraftType}}</span>
+                  </div>
+                  <div class="row">
+                    驾机号: <span>{{c.flyInfoMain.aircraftNum}}</span>
+                  </div>
+
+                  <div class="bottom clearfix mint-cell-wrapper right right-align">
+                    <!--<a href="/detail"></a>-->
+                    <router-link :to="{ name: 'DetailInfoPage',params: {datas: c}}">
+                      <el-button type="text" class="button">详情</el-button>
+                    </router-link>
+                  </div>
+                </div>
+              </el-card>
+            </el-row>
+          </li>
+        </ul>
+        <!--<CardMainInfo :list="list"/>-->
         <div slot="bottom" class="mint-loadmore-bottom">
           <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
           <span v-show="bottomStatus === 'loading'">
@@ -42,10 +67,12 @@
         headtitle: '我发布的',
         maininfo: {},
         list: [],
-
+        index: 0,
         allLoaded: false,
         bottomStatus: '',
-        wrapperHeight: 0
+        wrapperHeight: 0,
+        pageNo:1,
+        pageSize:10
       }
     },
     created () {
@@ -74,7 +101,6 @@
       }).then(function (resp) {
         console.log(resp.data)
         that.list = resp.data.data
-
       }).catch(resp => {
         console.log('请求失败：' + resp.status + ',' + resp.statusText)
       })
@@ -85,8 +111,9 @@
       },
 
       loadBottom () {
+        let that = this
         setTimeout(() => {
-          console.log("load more")
+          console.log('load more')
           // let lastValue = this.list[this.list.length - 1]
           // if (lastValue < 40) {
           //   for (let i = 1; i <= 10; i++) {
@@ -95,7 +122,9 @@
           // } else {
           //   this.allLoaded = true
           // }
-          // this.$refs.loadmore.onBottomLoaded()
+
+          this.$refs.loadmore.onBottomLoaded()
+
         }, 1500)
       }
     },
@@ -105,13 +134,21 @@
   }
 </script>
 
-<style scoped>
+<style>
   @component-namespace page {
     @component loadmore {
       @descendent desc {
-        text-align: center ;
-        color: #666   ;
-        padding-bottom:   5px   ;
+        text-align: center
+
+      ;
+        color: #666
+
+      ;
+        padding-bottom:
+
+      5px
+
+      ;
       &:last-of-type {
          border-bottom: solid 1px #eee;
        }

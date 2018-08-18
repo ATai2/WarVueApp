@@ -3,11 +3,13 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import AddInfo from '@/components/AddInfo'
 import MyRelease from '@/components/MyRelease'
+import MyRelease2 from '@/components/MyRelease2'
+import MyRelease3 from '@/components/MyRelease3'
 import SumInfos from '@/components/SumInfos'
 import SelectPage from '@/components/SelectPage'
 import CardMainInfo from '@/components/CardMainInfo'
 import TimeLine from '@/components/TimeLine'
-import ListPullView from '@/components/ListPullView'
+// import ListPullView from '@/components/ListPullView'
 import DetailInfoPage from '@/components/DetailInfoPage'
 // import ReceiveInfos from '@/components/ReceiveInfos'
 
@@ -29,6 +31,14 @@ export default new Router({
       path: '/myrelease',
       name: 'MyRelease',
       component: MyRelease
+    },{
+      path: '/myrelease2',
+      name: 'MyRelease2',
+      component: MyRelease2
+    },{
+      path: '/myrelease3',
+      name: 'MyRelease3',
+      component: MyRelease3
     },
     {
       path: '/suminfos',

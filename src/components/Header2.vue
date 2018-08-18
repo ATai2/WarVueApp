@@ -1,22 +1,19 @@
 <template>
   <mt-header class="bgcolor" :title="title">
     <router-link to="/" slot="left">
-      <mt-button icon="back">返回</mt-button>
+      <mt-button icon="back" >返回</mt-button>
     </router-link>
-
+    <mt-button @click="handleClose">搜索</mt-button>
   </mt-header>
 </template>
 
 <script>
   export default {
     name: 'Header',
-    props: ['title'],
-    methods: {
-      goback () {
+    props:["title"],
+    methods:{
+      goback(){
         this.$router.go(-1)
-      },
-      handleClose () {
-        alert('close this page')
       }
     }
   }
