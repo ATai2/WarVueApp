@@ -9,6 +9,7 @@ import SumInfos from '@/components/SumInfos'
 import SelectPage from '@/components/SelectPage'
 import CardMainInfo from '@/components/CardMainInfo'
 import TimeLine from '@/components/TimeLine'
+import FilterPage from '@/components/FilterPage'
 // import ListPullView from '@/components/ListPullView'
 import DetailInfoPage from '@/components/DetailInfoPage'
 // import ReceiveInfos from '@/components/ReceiveInfos'
@@ -29,6 +30,8 @@ export default new Router({
     },
     {
       path: '/myrelease',
+      // name: 'MyRelease3',
+      // component: MyRelease3
       name: 'MyRelease',
       component: MyRelease
     },{
@@ -55,11 +58,11 @@ export default new Router({
       name: 'SelectPage',
       component: SelectPage
     }    ,
-    {
-      path: '/listpull',
-      name: 'ListPullView',
-      component: ListPullView
-    }    ,
+    // {
+    //   path: '/listpull',
+    //   name: 'ListPullView',
+    //   component: ListPullView
+    // }    ,
     {
       path: '/cardlist',
       name: 'CardMainInfo',
@@ -85,6 +88,11 @@ export default new Router({
       path: '/timeline',
       name: 'timeline',
       component: TimeLine
+    },
+    {
+      path: '/filter',
+      name: 'FilterPage',
+      component: FilterPage
     }
   ]
 })

@@ -21,6 +21,9 @@
       <router-link :to="{ name: 'SumInfos'}">
         <mt-button type="primary" class="row">信息汇总</mt-button>
       </router-link>
+      <router-link :to="{ name: 'FilterPage'}">
+        <mt-button type="primary" class="row">信息汇总</mt-button>
+      </router-link>
     </div>
   </div>
 </template>
