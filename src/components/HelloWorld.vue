@@ -10,20 +10,21 @@
         <router-link :to="{ name: 'AddInfo'}">
           <mt-button type="primary" class="row">信息发布</mt-button>
         </router-link>
-        <router-link :to="{ name: 'MyRelease'}">
+        <router-link :to="{ name: 'MyRelease2',params:{url:'/userPublish/',title:'我发布的',userid:id,filterParams:{}}}">
           <mt-button type="primary" class="row">我发布的</mt-button>
         </router-link>
       </div>
 
-      <router-link v-else :to="{ name: 'MyReceiver'}">
+      <router-link :to="{ name: 'MyRelease',params:{url:'/userPublish/',title:'我接收的',userid:id,filterParams:{}}}">
         <mt-button type="primary" class="row">我接收的</mt-button>
       </router-link>
-      <router-link :to="{ name: 'SumInfos'}">
+      <!--<router-link v-else :to="{ name: 'MyRelease',params:{url:'/userPublish',title:'我接收的',filterParams:{}}}">-->
+        <!--<mt-button type="primary" class="row">我接收的</mt-button>-->
+      <!--</router-link>-->
+      <router-link :to="{ name: 'SumInfos',params:{url:'/userPublish/',title:'我接收的',userid:id,filterParams:{}}}">
         <mt-button type="primary" class="row">信息汇总</mt-button>
       </router-link>
-      <router-link :to="{ name: 'FilterPage'}">
-        <mt-button type="primary" class="row">信息汇总</mt-button>
-      </router-link>
+
     </div>
   </div>
 </template>
@@ -42,6 +43,7 @@
     components: {Header},
     data () {
       return {
+        id:'123',
         title: '软件信息管理',
         canSee: 'none',
         releaseUser:true,
@@ -62,6 +64,8 @@
     created () {
       this.openIndicator()
       console.log("home created")
+      this.userId='123'
+      this.$store.commit('upadateUserId', this.userId)
       // setTimeout("alert('对不起, 要你久候')", 3000 )
     },
     beforeDestroy() {

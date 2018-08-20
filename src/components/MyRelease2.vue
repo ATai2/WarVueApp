@@ -1,26 +1,11 @@
 <template>
   <div class="page-loadmore">
     <Header :title="headtitle"/>
-
-
-    <!--<h1 class="page-title">Pull up</h1>-->
-    <!--<p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>-->
-    <!--<p class="page-loadmore-desc">translate : {{ translate }}</p>-->
-    <!--<div class="loading-background" :style="{ transform: 'scale3d(' + moveTranslate + ',' + moveTranslate + ',1)' }">-->
-    <!--translateScale : {{ moveTranslate }}-->
-    <!--</div>-->
-
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
       <mt-loadmore :top-method="loadTop" @translate-change="translateChange" @top-status-change="handleTopChange"
                    :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded"
                    ref="loadmore">
-
-        <!--<ul class="page-loadmore-list">-->
-        <!--<li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>-->
-        <!--</ul>-->
         <div v-if="empty"> 你还没有发布过~~~</div>
-        <!--<ul class="page-loadmore-list">-->
-          <!--<li v-for="c in list" class="page-loadmore-listitem">-->
             <el-row v-for="(c,index) in list" :key="index">
               <el-card :body-style="{ padding: '0px' }" :key="c.key">
                 <div style="padding: 14px;" class="info">
@@ -35,7 +20,6 @@
                   </div>
 
                   <div class="bottom clearfix mint-cell-wrapper right right-align">
-                    <!--<a href="/detail"></a>-->
                     <router-link :to="{ name: 'DetailInfoPage',params: {datas: c}}">
                       <el-button type="text" class="button">详情</el-button>
                     </router-link>
@@ -43,9 +27,6 @@
                 </div>
               </el-card>
             </el-row>
-          <!--</li>-->
-        <!--</ul>-->
-
         <div class="" v-if="allLoaded">没有更多</div>
 
         <div slot="top" class="mint-loadmore-top">
@@ -63,8 +44,6 @@
           </span>
         </div>
       </mt-loadmore>
-
-
     </div>
   </div>
 </template>
@@ -140,10 +119,12 @@
     components: {Header},
     data () {
       return {
+        url:"",
         list: [],
+        userId:'',
         allLoaded: false,
         headtitle: '我发布的',
-
+        filterParams:{},
         bottomStatus: '',
         wrapperHeight: 0,
 
@@ -156,11 +137,15 @@
 
         pageNo: 1,
         pageSize: 10,
-        userId: 1
-
       }
     },
-
+    watch:{
+      list:function (newQuestion, oldQuestion) {
+        if (this.list.length == 0) {
+          this.empty=true
+        }
+      }
+    },
     methods: {
       handleBottomChange (status) {
         this.bottomStatus = status
@@ -171,15 +156,20 @@
         setTimeout(() => {
           axios({
             method: 'get',
-            url: Global.serverSrc + '/userPublish/' + that.userId,
+            url: Global.serverSrc + that.url + that.userId,
             params: {
               pageNo: that.pageNo,
               pageSize: that.pageSize
             },
           }).then(function (resp) {
             console.log(resp.data)
-            that.list.push( resp.data.data)
-
+            if (resp.data.data.length > 0) {
+              for (let i = 0; i <resp.data.data.length; i++) {
+                that.list.push(resp.data.data[i])
+              }
+            }else{
+              that.list=[]
+            }
             if (resp.data.data.size() == that.pageSize) {
               that.pageNo++
             }
@@ -190,10 +180,10 @@
             console.log('请求失败：' + resp.status + ',' + resp.statusText)
           })
 
-          let firstValue = this.list[0]
-          for (let i = 1; i <= 10; i++) {
-            this.list.unshift(firstValue - i)
-          }
+          // let firstValue = this.list[0]
+          // for (let i = 1; i <= 10; i++) {
+          //   this.list.unshift(firstValue - i)
+          // }
           this.$refs.loadmore.onTopLoaded()
         }, 1500)
         // this.$refs.loadmore.onBottomLoaded();
@@ -209,19 +199,20 @@
         this.translate = translateNum.toFixed(2)
         this.moveTranslate = (1 + translateNum / 70).toFixed(2)
       },
-      empty_list () {
-        this.empty = true
-      },
+      // empty_list () {
+      //   this.empty = true
+      // },
       endLoad(datalist){
         if (datalist.size() < this.pageNo) {
           this.allLoaded=true
         }
       },
       loadTop () {
+        let that=this
         setTimeout(() => {
           axios({
             method: 'get',
-            url: Global.serverSrc + '/userPublish/' + userId,
+            url: Global.serverSrc + that.url + that.userId,
             params: {
               pageNo: that.pageNo,
               pageSize: that.pageSize
@@ -243,6 +234,12 @@
     },
 
     created () {
+      console.log(this.$route.params)
+      this.url=this.$route.params.url
+      this.filterParams=this.$route.params.filterParams
+      this.headtitle=this.$route.params.title
+      this.userId=this.$route.params.userid
+
       let that = this
       axios({
         method: 'get',
@@ -264,17 +261,22 @@
       setTimeout(() => {
         axios({
           method: 'get',
-          url: Global.serverSrc + '/userPublish/' + that.userId,
+          url: Global.serverSrc + that.url + that.userId,
           params: {
             pageNo: that.pageNo,
             pageSize: that.pageSize
           },
         }).then(function (resp) {
           console.log(resp.data)
-          that.list.push(resp.data.data)
+          if (resp.data.data.length > 0) {
+            for (let i = 0; i <resp.data.data.length; i++) {
+              that.list.push(resp.data.data[i])
+            }
+          }else{
+            that.list=[]
+          }
           // that.list = resp.data.data
           that.pageNo++
-          empty_list()
           this.$refs.loadmore.onTopLoaded()
         }).catch(resp => {
           console.log('请求失败：' + resp.status + ',' + resp.statusText)

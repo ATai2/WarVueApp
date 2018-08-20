@@ -19,15 +19,16 @@
   import ListInputDetail from './ListInputDetail'
   import {
     Indicator,
-    Toast
-  } from 'mint-ui';
+    Toast,
+    MessageBox
+  } from 'mint-ui'
   import HeaderToLast from './HeaderToLast'
-
 
   export default {
     name: 'AddInfo',
     data () {
       return {
+        userId: '',
         headtitle: '添加',
         activeNames: ['明细1'],
         subject: ['1', '2'],
@@ -38,34 +39,10 @@
           aircraftNum: [
             'hand'
           ],
-          subject: [
-            'Subject1',
-            'Subject2',
-            'Subject3',
-            'Subject4',
-            'Subject5',
-          ],
-          airport: [
-            'startport1',
-            'startport2',
-            'startport3',
-            'startport4',
-            'startport5',
-          ],
-          pilot: [
-            'politlist1',
-            'politlist2',
-            'politlist3',
-            'politlist4',
-            'politlist5',
-          ],
-          engineer: [
-            'engineerlist1',
-            'engineerlist2',
-            'engineerlist3',
-            'engineerlist4',
-            'engineerlist5',
-          ]
+          subject: [],
+          airport: [],
+          pilot: [],
+          engineer: []
         },
         items: [{
           key: 1,
@@ -91,19 +68,28 @@
 
       },
       submitDatas () {
+        let that = this
         console.log('submit')
         let mainData = this.$refs.mainData.fd
 
         for (var key in mainData) {
           if (mainData[key] == '') {
             console.log(key)
+            MessageBox.alert('主表有必填字段为空!', '提示')
+            return
           }
         }
-        // console.log(mainData)
         let addListMap = this.$store.state.addList
         let addList = []
+        // for (let i = 0; i < addListMap.length; i++) {
+        //   let item=addListMap[i]
+        //   item.userId=this.$store.state.userId
+        //   addList.push(item)
+        // }
         for (var key in addListMap) {
-          addList.push(addListMap[key])
+          let item = addListMap[key]
+          item.createdUser = this.$store.state.userId
+          addList.push(item)
         }
 
         for (let i = 0; i < addList.length; i++) {
@@ -111,19 +97,16 @@
           for (var key in addListElement) {
             if (addListElement[key] == '') {
               console.log(key)
+              MessageBox.alert('明细表有必填字段为空!', '提示')
+              return
             }
             if (key == 'takeOffTime' || key == 'landingTime') {
-              addListElement[key]+=':00'
+              addListElement[key] += ':00'
             }
             console.log(addListElement[key])
           }
 
         }
-
-        console.log({
-          flyInfoMain: mainData,
-          flyInfoDetailList: addList
-        })
 
         Indicator.open({
           text: '正在提交表单',
@@ -135,21 +118,21 @@
         })
           .then(function (res) {
             console.log(res)
-            Indicator.close();
+            Indicator.close()
 
             Toast({
               message: '表单提交成功',
               position: 'bottom'
-            });
-            this.$router.go(-1)
+            })
+            that.$router.go(-1)
           })
           .catch(function (err) {
             console.log(err)
-            Indicator.close();
+            Indicator.close()
             Toast({
               message: '表单提交失败',
               position: 'bottom'
-            });
+            })
           })
       },
       handleChange (val) {
@@ -160,7 +143,8 @@
       console.log('created')
       console.log('ajax load data')
       console.log(Global.serverSrc)
-      let that=this
+      this.userId = this.$route.params.userId
+      let that = this
       axios({
         method: 'get',
         url: Global.serverSrc + '/fly/info/optional/names'

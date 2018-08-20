@@ -7,7 +7,8 @@ Vue.use(Vuex)
 // each Vuex instance is just a single state tree.
 const state = {
   count: 0,
-  addList: {}
+  addList: {},
+  userId:''
 }
 
 // mutations are operations that actually mutates the state.
@@ -24,6 +25,9 @@ const mutations = {
   },
   updateItem (state,item) {
     state.addList[item.key] = item
+  },
+  upadateUserId (state, val) {
+    state.userId=val
   }
 }
 
