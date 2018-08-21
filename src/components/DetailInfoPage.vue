@@ -1,6 +1,13 @@
 <template>
   <div>
-    <HeaderToLast :title="headtitle" v-on:delWholeInfo="delWholeInfo"/>
+    <mt-header class="bgcolor" :title="headtitle">
+      <router-link :to="{ name: 'MyRelease2', params: { url:url ,filterParams:params.filterParams}}"  slot="left">
+        <mt-button icon="back" >返回</mt-button>
+      </router-link>
+      <mt-button  slot="right" @click="goback">back</mt-button>
+    </mt-header>
+    <!--<HeaderCustom :title="headtitle"/>-->
+    <!--<HeaderToLast :title="headtitle" v-on:delWholeInfo="delWholeInfo"/>-->
     <MainInfo class="row" :maininfo="flyInfoMain"/>
     <el-card class="box-card info-color">
       <el-collapse v-model="activeNames" @change="handleChange">
@@ -30,11 +37,13 @@
   import Header from './Header'
   import InfoDetail from './InfoDetail'
   import HeaderToLast from './HeaderToLast'
+  import HeaderCustom from './HeaderCustom'
+  import Global from './Global'
 
   export default {
     name: 'DetailInfoPage',
     // props:['list'],
-    components: {HeaderToLast, InfoDetail, Header, TimeLine, MainInfo},
+    components: {HeaderCustom, HeaderToLast, InfoDetail, Header, TimeLine, MainInfo},
     data () {
       return {
         headtitle: '信息详情',
@@ -42,10 +51,15 @@
         flyInfoMain: {},
         detailList: [],
         activeNames: ['1'],
-        items: []
+        items: [],
+        params:{},
+        url:''
       }
     },
     methods: {
+      goback(){
+        this.$router.go(-1)
+      },
       delWholeInfo () {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
@@ -91,6 +105,11 @@
       }
     },
     created () {
+      this.url=this.$route.params.url
+      this.params={}
+      this.params.userid=this.$store.state.userid
+      this.params.filterParams=this.$route.params.filterParams
+
       console.log(this.$route.params.datas)
       this.detailList = this.$route.params.datas.flyInfoDetailList
       this.flyInfoMain = this.$route.params.datas.flyInfoMain

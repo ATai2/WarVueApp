@@ -1,32 +1,40 @@
 <template>
   <div class="page-loadmore">
-    <Header :title="headtitle"/>
+    <mt-header class="bgcolor" :title="headtitle">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link>
+
+      <mt-button @click="openFilterPage" slot="right">筛选</mt-button>
+
+    </mt-header>
+
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
       <mt-loadmore :top-method="loadTop" @translate-change="translateChange" @top-status-change="handleTopChange"
                    :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded"
                    ref="loadmore">
-        <div v-if="empty"> 你还没有发布过~~~</div>
-            <el-row v-for="(c,index) in list" :key="index">
-              <el-card :body-style="{ padding: '0px' }" :key="c.key">
-                <div style="padding: 14px;" class="info">
-                  <div class="row">
-                    日期: <span>{{c.flyInfoMain.date}}</span>
-                  </div>
-                  <div class="row">
-                    飞机型号: <span>{{c.flyInfoMain.aircraftType}}</span>
-                  </div>
-                  <div class="row">
-                    驾机号: <span>{{c.flyInfoMain.aircraftNum}}</span>
-                  </div>
+        <!--<div v-if="empty"> 你还没有发布过~~~</div>-->
+        <el-row v-for="(c,index) in list" :key="index">
+          <el-card :body-style="{ padding: '0px' }" :key="c.key">
+            <div style="padding: 14px;" class="info">
+              <div class="row">
+                日期: <span>{{c.flyInfoMain.date}}</span>
+              </div>
+              <div class="row">
+                飞机型号: <span>{{c.flyInfoMain.aircraftType}}</span>
+              </div>
+              <div class="row">
+                驾机号: <span>{{c.flyInfoMain.aircraftNum}}</span>
+              </div>
 
-                  <div class="bottom clearfix mint-cell-wrapper right right-align">
-                    <router-link :to="{ name: 'DetailInfoPage',params: {datas: c}}">
-                      <el-button type="text" class="button">详情</el-button>
-                    </router-link>
-                  </div>
-                </div>
-              </el-card>
-            </el-row>
+              <div class="bottom clearfix mint-cell-wrapper right right-align">
+                <router-link :to="{ name: 'DetailInfoPage',params: {datas: c}}">
+                  <el-button type="text" class="button">详情</el-button>
+                </router-link>
+              </div>
+            </div>
+          </el-card>
+        </el-row>
         <div class="" v-if="allLoaded">没有更多</div>
 
         <div slot="top" class="mint-loadmore-top">
@@ -113,18 +121,18 @@
 <script type="text/babel">
   import axios from 'axios'
   import Global from './Global'
-  import Header from './Header'
+  import Header2 from './Header2'
 
   export default {
-    components: {Header},
+    components: {Header2},
     data () {
       return {
-        url:"",
+        url: '',
         list: [],
-        userId:'',
+        userId: '',
         allLoaded: false,
-        headtitle: '我发布的',
-        filterParams:{},
+        headtitle: '我发布的33',
+        filterParams: {},
         bottomStatus: '',
         wrapperHeight: 0,
 
@@ -139,16 +147,47 @@
         pageSize: 10,
       }
     },
-    watch:{
-      list:function (newQuestion, oldQuestion) {
+    watch: {
+      list: function (newQuestion, oldQuestion) {
         if (this.list.length == 0) {
-          this.empty=true
+          this.empty = true
         }
       }
     },
     methods: {
+      openFilterPage () {
+        this.$router.push({name: 'FilterPage', params: {url: this.url}})
+      },
       handleBottomChange (status) {
         this.bottomStatus = status
+      },
+
+      getData () {
+        let that = this
+        // setTimeout(() => {
+        this.filterParams['pageNo'] = that.pageNo
+        this.filterParams['pageSize'] = that.pageSize
+        axios({
+          method: 'get',
+          url: Global.serverSrc + that.url + that.userId,
+          params: that.filterParams,
+        }).then(function (resp) {
+          console.log(resp.data)
+          if (resp.data.data.length > 0) {
+            for (let i = 0; i < resp.data.data.length; i++) {
+              that.list.push(resp.data.data[i])
+            }
+          } else {
+            that.list = []
+          }
+          // that.list = resp.data.data
+          that.pageNo++
+          this.$refs.loadmore.onTopLoaded()
+        }).catch(resp => {
+          console.log('请求失败：' + resp.status + ',' + resp.statusText)
+          this.$refs.loadmore.onTopLoaded()
+        })
+        // }, 1500)
       },
 
       loadBottom () {
@@ -164,11 +203,11 @@
           }).then(function (resp) {
             console.log(resp.data)
             if (resp.data.data.length > 0) {
-              for (let i = 0; i <resp.data.data.length; i++) {
+              for (let i = 0; i < resp.data.data.length; i++) {
                 that.list.push(resp.data.data[i])
               }
-            }else{
-              that.list=[]
+            } else {
+              that.list = []
             }
             if (resp.data.data.size() == that.pageSize) {
               that.pageNo++
@@ -202,13 +241,13 @@
       // empty_list () {
       //   this.empty = true
       // },
-      endLoad(datalist){
+      endLoad (datalist) {
         if (datalist.size() < this.pageNo) {
-          this.allLoaded=true
+          this.allLoaded = true
         }
       },
       loadTop () {
-        let that=this
+        let that = this
         setTimeout(() => {
           axios({
             method: 'get',
@@ -235,10 +274,10 @@
 
     created () {
       console.log(this.$route.params)
-      this.url=this.$route.params.url
-      this.filterParams=this.$route.params.filterParams
-      this.headtitle=this.$route.params.title
-      this.userId=this.$route.params.userid
+      this.url = this.$route.params.url
+      this.filterParams = this.$route.params.filterParams
+      this.headtitle = this.$route.params.title
+      this.userId = this.$store.state.userId
 
       let that = this
       axios({
@@ -258,31 +297,8 @@
       }).catch(resp => {
         console.log('请求失败：' + resp.status + ',' + resp.statusText)
       })
-      setTimeout(() => {
-        axios({
-          method: 'get',
-          url: Global.serverSrc + that.url + that.userId,
-          params: {
-            pageNo: that.pageNo,
-            pageSize: that.pageSize
-          },
-        }).then(function (resp) {
-          console.log(resp.data)
-          if (resp.data.data.length > 0) {
-            for (let i = 0; i <resp.data.data.length; i++) {
-              that.list.push(resp.data.data[i])
-            }
-          }else{
-            that.list=[]
-          }
-          // that.list = resp.data.data
-          that.pageNo++
-          this.$refs.loadmore.onTopLoaded()
-        }).catch(resp => {
-          console.log('请求失败：' + resp.status + ',' + resp.statusText)
-          this.$refs.loadmore.onTopLoaded()
-        })
-      }, 1500)
+
+      this.getData()
     },
 
     mounted () {

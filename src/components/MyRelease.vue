@@ -1,6 +1,12 @@
 <template>
   <div class="page-loadmore">
-    <Header :title="headtitle"/>
+    <mt-header class="bgcolor" :title="headtitle">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link>
+      <router-link :to="FilterPage" slot="left">
+      <mt-button  slot="right">筛选</mt-button>    </router-link>
+    </mt-header>
 
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
       <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded"
@@ -51,7 +57,7 @@
 </template>
 
 <script>
-  import Header from './Header'
+
   import MainTable from './MainTable'
   import axios from 'axios'
   import Global from './Global'
@@ -61,7 +67,7 @@
 
   export default {
     name: 'MyRelease',
-    components: {HeaderToLast, CardMainInfo, MainInfo, MainTable, Header},
+    components: {HeaderToLast, CardMainInfo, MainInfo, MainTable},
     data () {
       return {
         headtitle: '我发布的',
@@ -114,18 +120,12 @@
         let that = this
         setTimeout(() => {
           console.log('load more')
-          // let lastValue = this.list[this.list.length - 1]
-          // if (lastValue < 40) {
-          //   for (let i = 1; i <= 10; i++) {
-          //     this.list.push(lastValue + i)
-          //   }
-          // } else {
-          //   this.allLoaded = true
-          // }
-
           this.$refs.loadmore.onBottomLoaded()
 
         }, 1500)
+      },
+      openFilterPage(){
+
       }
     },
     mounted () {

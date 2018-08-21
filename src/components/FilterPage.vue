@@ -76,7 +76,8 @@
         this.fd.aircraftNum = ''
       },
       confirmFilter(){
-
+        console.log('confirm')
+        this.$router.push({ name: 'MyRelease2', params: { url:this.$route.params.url ,filterParams:this.fd}})
       },
       open (picker) {
         this.$refs[picker].open()
@@ -127,13 +128,7 @@
         console.log(resp.data)
         that.dbItem.aircraftType = resp.data.data.aircraftType
         that.dbItem.aircraftNum = resp.data.data.aircraftNum
-        // that.dbItem.subject = resp.data.data.subject
-        // that.dbItem.airport = resp.data.data.airport
-        // that.dbItem.pilot = resp.data.data.pilot
-        // that.dbItem.engineer = resp.data.data.engineer
-
         console.log(resp.data)
-
       }).catch(resp => {
         console.log('请求失败：' + resp.status + ',' + resp.statusText)
       })

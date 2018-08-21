@@ -1,24 +1,24 @@
 <template>
-    <div>
-      <div class="h-left">
-        <i>
-
-        </i>
-        <button>返回</button>
+    <header>
+      <div class="h-left mint-header">
+        <button class="mint-header-button is-left" @click="goback">返回</button>
       </div>
-      <lable class="h-center" >{{title}}</lable>
+      <h1 class="h-center mint-header-title" >{{title}}</h1>
       <button >{{rightfunction}}</button>
-    </div>
+    </header>
 </template>
 
 <script>
   export default {
     name: 'HeaderCustom',
+    props:['title'],
     data(){
 
     },
     methods:{
-
+      goback(){
+        this.$router.go(-1)
+      }
     },
     created(){
 

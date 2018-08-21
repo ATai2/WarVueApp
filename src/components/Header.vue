@@ -3,7 +3,7 @@
     <router-link to="/" slot="left">
       <mt-button icon="back">返回</mt-button>
     </router-link>
-
+    <!--<mt-button @click="openFilterPage" slot="right">筛选</mt-button>-->
   </mt-header>
 </template>
 

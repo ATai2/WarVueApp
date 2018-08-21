@@ -10,18 +10,18 @@
         <router-link :to="{ name: 'AddInfo'}">
           <mt-button type="primary" class="row">信息发布</mt-button>
         </router-link>
-        <router-link :to="{ name: 'MyRelease2',params:{url:'/userPublish/',title:'我发布的',userid:id,filterParams:{}}}">
+        <router-link :to="{ name: 'MyRelease2',params:{url:'/userPublish/',title:'我发布的222',userid:id}}">
           <mt-button type="primary" class="row">我发布的</mt-button>
         </router-link>
       </div>
 
-      <router-link :to="{ name: 'MyRelease',params:{url:'/userPublish/',title:'我接收的',userid:id,filterParams:{}}}">
+      <router-link :to="{ name: 'MyRelease2',params:{url:'/userPublish/',title:'我接收的',userid:id}}">
         <mt-button type="primary" class="row">我接收的</mt-button>
       </router-link>
       <!--<router-link v-else :to="{ name: 'MyRelease',params:{url:'/userPublish',title:'我接收的',filterParams:{}}}">-->
         <!--<mt-button type="primary" class="row">我接收的</mt-button>-->
       <!--</router-link>-->
-      <router-link :to="{ name: 'SumInfos',params:{url:'/userPublish/',title:'我接收的',userid:id,filterParams:{}}}">
+      <router-link :to="{ name: 'SumInfos',params:{url:'/userPublish/',title:'我接收的',userid:id}}">
         <mt-button type="primary" class="row">信息汇总</mt-button>
       </router-link>
 
@@ -52,11 +52,11 @@
     },
     methods: {
       openIndicator () {
-        Indicator.open({
-          text: '正在加载中',
-          spinnerType: 'snake'
-        })
-        setTimeout(()=>{  Indicator.close()}, 2000)
+        // Indicator.open({
+        //   text: '正在加载中',
+        //   spinnerType: 'snake'
+        // })
+        // setTimeout(()=>{  Indicator.close()}, 2000)
         this.canSee = 'block'
 
       },
