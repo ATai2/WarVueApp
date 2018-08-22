@@ -4,9 +4,7 @@
       <router-link to="/" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
-
       <mt-button @click="openFilterPage" slot="right">筛选</mt-button>
-
     </mt-header>
 
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
@@ -162,15 +160,15 @@
         this.bottomStatus = status
       },
 
-      getData () {
+      loadBottom () {
         let that = this
-        // setTimeout(() => {
-        this.filterParams['pageNo'] = that.pageNo
-        this.filterParams['pageSize'] = that.pageSize
         axios({
           method: 'get',
           url: Global.serverSrc + that.url + that.userId,
-          params: that.filterParams,
+          params: {
+            pageNo: that.pageNo,
+            pageSize: that.pageSize
+          },
         }).then(function (resp) {
           console.log(resp.data)
           if (resp.data.data.length > 0) {
@@ -180,53 +178,16 @@
           } else {
             that.list = []
           }
-          // that.list = resp.data.data
-          that.pageNo++
-          this.$refs.loadmore.onTopLoaded()
+          if (resp.data.data.size() === that.pageSize) {
+            that.pageNo++
+          }
+          that.$refs.loadmore.onBottomLoaded()
+          empty_list()
         }).catch(resp => {
           console.log('请求失败：' + resp.status + ',' + resp.statusText)
-          this.$refs.loadmore.onTopLoaded()
         })
-        // }, 1500)
-      },
 
-      loadBottom () {
-        let that = this
-        setTimeout(() => {
-          axios({
-            method: 'get',
-            url: Global.serverSrc + that.url + that.userId,
-            params: {
-              pageNo: that.pageNo,
-              pageSize: that.pageSize
-            },
-          }).then(function (resp) {
-            console.log(resp.data)
-            if (resp.data.data.length > 0) {
-              for (let i = 0; i < resp.data.data.length; i++) {
-                that.list.push(resp.data.data[i])
-              }
-            } else {
-              that.list = []
-            }
-            if (resp.data.data.size() == that.pageSize) {
-              that.pageNo++
-            }
-
-            that.$refs.loadmore.onBottomLoaded()
-            empty_list()
-          }).catch(resp => {
-            console.log('请求失败：' + resp.status + ',' + resp.statusText)
-          })
-
-          // let firstValue = this.list[0]
-          // for (let i = 1; i <= 10; i++) {
-          //   this.list.unshift(firstValue - i)
-          // }
-          this.$refs.loadmore.onTopLoaded()
-        }, 1500)
-        // this.$refs.loadmore.onBottomLoaded();
-        // }, 1500);
+        this.$refs.loadmore.onTopLoaded()
       },
 
       handleTopChange (status) {
@@ -238,9 +199,7 @@
         this.translate = translateNum.toFixed(2)
         this.moveTranslate = (1 + translateNum / 70).toFixed(2)
       },
-      // empty_list () {
-      //   this.empty = true
-      // },
+
       endLoad (datalist) {
         if (datalist.size() < this.pageNo) {
           this.allLoaded = true
@@ -260,9 +219,6 @@
             console.log(resp.data)
             that.list = resp.data.data
             that.pageNo++
-            if (this.list.size() == 0) {
-              that.empty_list()
-            }
           }).catch(resp => {
             console.log('请求失败：' + resp.status + ',' + resp.statusText)
           })
@@ -298,7 +254,29 @@
         console.log('请求失败：' + resp.status + ',' + resp.statusText)
       })
 
-      this.getData()
+      axios({
+        method: 'get',
+        url: Global.serverSrc + that.url + that.userId,
+        params: {
+          pageNo: that.pageNo,
+          pageSize: that.pageSize
+        },
+      }).then(function (resp) {
+        console.log(resp.data)
+        if (resp.data.data.length > 0) {
+          for (let i = 0; i < resp.data.data.length; i++) {
+            that.list.push(resp.data.data[i])
+          }
+        } else {
+          that.list = []
+        }
+        // that.list = resp.data.data
+        that.pageNo++
+        // this.$refs.loadmore.onTopLoaded()
+      }).catch(resp => {
+        console.log('请求失败：' + resp.status + ',' + resp.statusText)
+        // this.$refs.loadmore.onTopLoaded()
+      })
     },
 
     mounted () {

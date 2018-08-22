@@ -15,18 +15,13 @@
                           :key="index">
           <InfoDetail class="row" :item="item"/>
           <div class="row">
-            <mt-button @click="delinfo(index)">编辑</mt-button>
+            <mt-button @click="editinfo(index)">编辑</mt-button>
             <mt-button @click="delinfo(index)">删除</mt-button>
 
           </div>
         </el-collapse-item>
       </el-collapse>
     </el-card>
-
-    <!--<mt-button class="el-row fix-bottom" type="primary">删除</mt-button>-->
-
-    <!--<InfoDetail v-for="(item, index) in detailList" :key="index" :item="item"/>-->
-
   </div>
 
 </template>
@@ -60,8 +55,11 @@
       goback(){
         this.$router.go(-1)
       },
+      editinfo(index){
+
+      },
       delWholeInfo () {
-        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
@@ -91,11 +89,6 @@
                 position: 'bottom'
               });
             })
-
-          // Toast({
-          //   message: '删除成功',
-          //   iconClass: 'mintui mintui-success'
-          // });
         }).catch(() => {
 
         })

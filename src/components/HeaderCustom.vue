@@ -1,33 +1,35 @@
 <template>
-    <header>
-      <div class="h-left mint-header">
-        <button class="mint-header-button is-left" @click="goback">返回</button>
-      </div>
-      <h1 class="h-center mint-header-title" >{{title}}</h1>
-      <button >{{rightfunction}}</button>
-    </header>
+  <header>
+    <button @click="goback" class="mint-button mint-button--default mint-button--normal"><span
+      class="mint-button-icon"><i class="mintui mintui-back"></i></span> <label class="mint-button-text">返回</label>
+    </button>
+
+    <h1 class="h-center mint-header-title">{{title}}</h1>
+    <button>{{rightfunction}}</button>
+  </header>
 </template>
 
 <script>
   export default {
     name: 'HeaderCustom',
-    props:['title'],
-    data(){
+    props: ['title'],
+    data () {
 
     },
-    methods:{
-      goback(){
+    methods: {
+      goback () {
         this.$router.go(-1)
-      }
+      },
+      rightfunction(){}
     },
-    created(){
+    created () {
 
     }
   }
 </script>
 
 <style scoped>
-  .h-left{
+  .h-left {
     text-align: left;
   }
 </style>

@@ -9,8 +9,6 @@
     <div v-on:click="open('picker2')" v-on:closepop="closepop">
       <mt-cell title="着陆时间*" :label="item.landingTime" is-link></mt-cell>
     </div>
-    <!--<mt-field label="起飞时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.takeOffTime"></mt-field>-->
-    <!--<mt-field label="着陆时间*" placeholder="请输入4位数字时间" :attr="{ maxlength: 4 }" :text="item.landingTime"></mt-field>-->
     <div v-on:click="seen2" v-on:closepop="closepop2">
       <mt-cell title="起飞机场*" :label="item.takeOffAirport" is-link></mt-cell>
     </div>
@@ -19,9 +17,10 @@
     </div>
 
     <mt-cell title="空中飞行时间*" :label="item.flightTime"></mt-cell>
-    <mt-field label="开关车实验时间*" placeholder="请输入分钟" v-model="item.turnOnAndOffTime" type="number" :attr="{ maxlength: 8 }"
+    <mt-field label="开关车实验时间*" placeholder="请输入分钟" v-model="item.turnOnAndOffTime" type="number"
+              :attr="{ maxlength: 8 }"
               :text="item.turnOnAndOffTime"></mt-field>
-    <mt-field label="完成实验点数*" placeholder="请输入完成实验点数"  v-model="item.points" type="number" :attr="{ maxlength: 8 }"
+    <mt-field label="完成实验点数*" placeholder="请输入完成实验点数" v-model="item.points" type="number" :attr="{ maxlength: 8 }"
               :text="item.points"></mt-field>
 
     <div v-on:click="seen4" v-on:closepop="closepop4">
@@ -106,7 +105,6 @@
         this.date1 = value.valueOf()
       },
       handleChange2 (value) {
-        // console.log(value)
         this.item.landingTime = value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + (value.getDate()) + ' ' + value.getHours() + ':' + value.getMinutes()
         this.date2 = value.valueOf()
 
@@ -135,7 +133,6 @@
 
           this.item.flightTime = s
         }
-
       },
       open (picker) {
         this.$refs[picker].open()
@@ -186,7 +183,6 @@
       let dt = new Date()
       this.value1 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
       this.value2 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
-      // console.log('dbitem    ' + this.dbItem)
     }
   }
 </script>
