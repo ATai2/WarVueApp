@@ -15,6 +15,7 @@
   export default {
     name: 'EditInfoPage',
     components: {InputDetail, MainInfo, HeaderCustom},
+
     data () {
       return {
         dbItem:{}

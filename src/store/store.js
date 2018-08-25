@@ -8,7 +8,8 @@ Vue.use(Vuex)
 const state = {
   count: 0,
   addList: {},
-  userId:''
+  userId:'',
+  url:''
 }
 
 // mutations are operations that actually mutates the state.
@@ -28,6 +29,9 @@ const mutations = {
   },
   upadateUserId (state, val) {
     state.userId=val
+  },
+  updateUrl (state, val) {
+    state.url=val
   }
 }
 

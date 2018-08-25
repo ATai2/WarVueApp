@@ -1,11 +1,21 @@
 <template>
-  <div>myrelease</div>
+  <div>
+    <HeaderCustom :title="title"/>
+
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'SumInfos'
+  import HeaderCustom from './HeaderCustom'
 
+  export default {
+    name: 'SumInfos',
+    data(){
+      return {
+        title:'信息汇总'
+      }
+    },
+    components: {HeaderCustom}
   }
 </script>
 

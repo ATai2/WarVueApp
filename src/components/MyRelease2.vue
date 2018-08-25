@@ -229,8 +229,12 @@
     },
 
     created () {
+      let statUrl = this.$store.state.url
+      if (statUrl == '') {
+        this.url = this.$route.params.url
+        this.$store.commit('updateUrl',this.url)
+      }
       console.log(this.$route.params)
-      this.url = this.$route.params.url
       this.filterParams = this.$route.params.filterParams
       this.headtitle = this.$route.params.title
       this.userId = this.$store.state.userId

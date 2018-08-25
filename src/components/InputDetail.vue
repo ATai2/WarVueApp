@@ -53,11 +53,13 @@
 
 <script>
   import SelectPage from './SelectPage'
+  import axios from 'axios'
+  import Global from './Global'
 
   export default {
     name: 'InputDetail',
     components: {SelectPage},
-    props: ['dbItem', 'listId'],
+    props: ['listId'],
     data () {
       return {
         value1: null,
@@ -65,6 +67,7 @@
         date1: null,
         date2: null,
         visible: false,
+        dbItem: {},
         item: {
           subject: '',
           takeOffTime: '',
@@ -183,6 +186,32 @@
       let dt = new Date()
       this.value1 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
       this.value2 = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
+
+      // if (this.$route.params.item) {
+      //   this.item=this.$route.params.item
+      // }
+      let urlItem = this.$route.params.item
+      if (urlItem) {
+        this.item = urlItem
+      }
+
+      let that = this
+      axios({
+        method: 'get',
+        url: Global.serverSrc + '/fly/info/optional/names'
+      }).then(function (resp) {
+        console.log(resp.data)
+        that.dbItem.aircraftType = resp.data.data.aircraftType
+        that.dbItem.aircraftNum = resp.data.data.aircraftNum
+        that.dbItem.subject = resp.data.data.subject
+        that.dbItem.airport = resp.data.data.airport
+        that.dbItem.pilot = resp.data.data.pilot
+        that.dbItem.engineer = resp.data.data.engineer
+
+      }).catch(resp => {
+        console.log('请求失败：' + resp.status + ',' + resp.statusText)
+      })
+
     }
   }
 </script>

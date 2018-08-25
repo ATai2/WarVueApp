@@ -1,10 +1,11 @@
 <template>
   <div>
+    <!--<HeaderCustom :title="headtitle"/>-->
     <mt-header class="bgcolor" :title="headtitle">
-      <router-link :to="{ name: 'MyRelease2', params: { url:url ,filterParams:params.filterParams}}"  slot="left">
-        <mt-button icon="back" >返回</mt-button>
+      <router-link :to="{ name: 'MyRelease2', params: { url:'/' ,filterParams:params.filterParams}}" slot="left">
+        <mt-button icon="back">返回</mt-button>
       </router-link>
-      <mt-button  slot="right" @click="goback">back</mt-button>
+      <mt-button slot="right" @click="goback">back</mt-button>
     </mt-header>
     <!--<HeaderCustom :title="headtitle"/>-->
     <!--<HeaderToLast :title="headtitle" v-on:delWholeInfo="delWholeInfo"/>-->
@@ -15,7 +16,7 @@
                           :key="index">
           <InfoDetail class="row" :item="item"/>
           <div class="row">
-            <mt-button @click="editinfo(index)">编辑</mt-button>
+            <mt-button @click="editinfo(item)" >编辑</mt-button>
             <mt-button @click="delinfo(index)">删除</mt-button>
 
           </div>
@@ -47,16 +48,21 @@
         detailList: [],
         activeNames: ['1'],
         items: [],
-        params:{},
-        url:''
+        params: {},
+        url: ''
       }
     },
     methods: {
-      goback(){
+      goback () {
         this.$router.go(-1)
       },
-      editinfo(index){
+      editinfo (item) {
+        console.log('editinfo')
+        this.$router.push({name:'EditInfoPage',params:{item:item}})
 
+      },
+      delinfo (index) {
+        console.log('delinfo')
       },
       delWholeInfo () {
         this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
@@ -65,7 +71,7 @@
           type: 'warning',
           center: true
         }).then(() => {
-          console.log("删除")
+          console.log('删除')
 
           axios.post(Global.serverSrc + '/fly/info/create/batch', {
             flyInfoMain: mainData,
@@ -73,21 +79,21 @@
           })
             .then(function (res) {
               console.log(res)
-              Indicator.close();
+              Indicator.close()
 
               Toast({
                 message: '表单提交成功',
                 position: 'bottom'
-              });
+              })
               this.$router.go(-1)
             })
             .catch(function (err) {
               console.log(err)
-              Indicator.close();
+              Indicator.close()
               Toast({
                 message: '表单提交失败',
                 position: 'bottom'
-              });
+              })
             })
         }).catch(() => {
 
@@ -98,10 +104,10 @@
       }
     },
     created () {
-      this.url=this.$route.params.url
-      this.params={}
-      this.params.userid=this.$store.state.userid
-      this.params.filterParams=this.$route.params.filterParams
+      this.url = this.$route.params.url
+      this.params = {}
+      this.params.userid = this.$store.state.userid
+      this.params.filterParams = this.$route.params.filterParams
 
       console.log(this.$route.params.datas)
       this.detailList = this.$route.params.datas.flyInfoDetailList
