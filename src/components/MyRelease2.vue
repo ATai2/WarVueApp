@@ -232,11 +232,17 @@
       let statUrl = this.$store.state.url
       if (statUrl == '') {
         this.url = this.$route.params.url
-        this.$store.commit('updateUrl',this.url)
+        this.$store.commit('updateUrl', this.url)
+      } else {
+        this.url=statUrl
       }
       console.log(this.$route.params)
-      this.filterParams = this.$route.params.filterParams
-      this.headtitle = this.$route.params.title
+      if (this.$route.params.filterParams) {
+        this.filterParams = this.$route.params.filterParams
+      }
+      if (this.$route.params.title) {
+        this.headtitle = this.$route.params.title
+      }
       this.userId = this.$store.state.userId
 
       let that = this

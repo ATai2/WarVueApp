@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderCustom :title="编辑"/>
+    <HeaderCustom :title="headtitle"/>
     <!--<MainInfo :maininfo="maininfo"/>-->
     <InputDetail :dbItem="dbItem" />
 
@@ -18,6 +18,7 @@
 
     data () {
       return {
+        headtitle:'编辑',
         dbItem:{}
       }
     },

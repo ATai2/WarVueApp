@@ -67,24 +67,45 @@
         date1: null,
         date2: null,
         visible: false,
-        dbItem: {},
+        dbItem: {
+          aircraftType: [],
+          aircraftNum: [],
+          subject: [],
+          airport: [],
+          pilot: [],
+          engineer: []
+        },
         item: {
           subject: '',
-          takeOffTime: '',
-          landingTime: '',
-          takeOffAirport: '',
-          landingAirport: '',
-          flightTime: '',
-          pilot: '',
-          turnOnAndOffTime: '',
-          points: '',
-          engineer: '',
-        },
+          takeOffTime:
+            '',
+          landingTime:
+            '',
+          takeOffAirport:
+            '',
+          landingAirport:
+            '',
+          flightTime:
+            '',
+          pilot:
+            '',
+          turnOnAndOffTime:
+            '',
+          points:
+            '',
+          engineer:
+            '',
+        }
+        ,
         subjectpopupVisible: false,
-        startportpopupVisible: false,
-        endportpopupVisible: false,
-        politpopupVisible: false,
-        engineerpopupVisible: false,
+        startportpopupVisible:
+          false,
+        endportpopupVisible:
+          false,
+        politpopupVisible:
+          false,
+        engineerpopupVisible:
+          false,
       }
     },
     watch: {
