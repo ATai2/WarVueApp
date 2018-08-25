@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderCustom :title="编辑"/>
-    <MainInfo :maininfo="maininfo"/>
+    <!--<MainInfo :maininfo="maininfo"/>-->
     <InputDetail :dbItem="dbItem" />
 
   </div>
@@ -16,7 +16,9 @@
     name: 'EditInfoPage',
     components: {InputDetail, MainInfo, HeaderCustom},
     data () {
-      return {}
+      return {
+        dbItem:{}
+      }
     },
     methods: {},
     created () {

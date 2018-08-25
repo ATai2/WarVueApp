@@ -24,6 +24,9 @@
       <router-link :to="{ name: 'SumInfos',params:{url:'/userPublish/',title:'我接收的',userid:id}}">
         <mt-button type="primary" class="row">信息汇总</mt-button>
       </router-link>
+      <router-link :to="{ name: 'SumInfos',params:{url:'/EditInfoPage/',title:'我接收的',userid:id}}">
+        <mt-button type="primary" class="row">编辑</mt-button>
+      </router-link>
 
     </div>
   </div>

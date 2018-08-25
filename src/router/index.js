@@ -12,7 +12,7 @@ import TimeLine from '@/components/TimeLine'
 import FilterPage from '@/components/FilterPage'
 // import ListPullView from '@/components/ListPullView'
 import DetailInfoPage from '@/components/DetailInfoPage'
-// import ReceiveInfos from '@/components/ReceiveInfos'
+import EditInfoPage from '@/components/EditInfoPage'
 
 Vue.use(Router)
 
@@ -93,6 +93,11 @@ export default new Router({
       path: '/filter',
       name: 'FilterPage',
       component: FilterPage
+    },
+    {
+      path: '/edit',
+      name: 'EditInfoPage',
+      component: EditInfoPage
     }
   ]
 })
