@@ -21,11 +21,8 @@
       <!--<router-link v-else :to="{ name: 'MyRelease',params:{url:'/userPublish',title:'我接收的',filterParams:{}}}">-->
       <!--<mt-button type="primary" class="row">我接收的</mt-button>-->
       <!--</router-link>-->
-      <router-link :to="{ name: 'SumInfos',params:{url:'/userPublish/',title:'我接收的'}}">
+      <router-link :to="{ name: 'SumCard',params:{url:'/userPublish/',title:'我接收的'}}">
         <mt-button type="primary" class="row">信息汇总</mt-button>
-      </router-link>
-      <router-link :to="{ name: 'SumInfos',params:{url:'/EditInfoPage/',title:'我接收的'}}">
-        <mt-button type="primary" class="row">编辑</mt-button>
       </router-link>
 
     </div>
@@ -81,7 +78,7 @@
         }
       }
 
-      MessageBox.alert(theRequest.phoneNumber,'phone')
+      // MessageBox.alert(theRequest.phoneNumber,'phone')
 
       this.openIndicator()
       console.log('home created')

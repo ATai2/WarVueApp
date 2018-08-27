@@ -5,7 +5,7 @@ import AddInfo from '@/components/AddInfo'
 import MyRelease from '@/components/MyRelease'
 import MyRelease2 from '@/components/MyRelease2'
 import MyRelease3 from '@/components/MyRelease3'
-import SumInfos from '@/components/SumInfos'
+import SumCard from '@/components/SumCard'
 import SelectPage from '@/components/SelectPage'
 import CardMainInfo from '@/components/CardMainInfo'
 import TimeLine from '@/components/TimeLine'
@@ -44,9 +44,9 @@ export default new Router({
       component: MyRelease3
     },
     {
-      path: '/suminfos',
-      name: 'SumInfos',
-      component: SumInfos
+      path: '/SumCard',
+      name: 'SumCard',
+      component: SumCard
     },
     {
       path: '/receriveinfos',
