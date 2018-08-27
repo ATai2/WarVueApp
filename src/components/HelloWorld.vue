@@ -67,8 +67,21 @@
     },
     created () {
 
-      let phoneNumber=this.$route.query.phoneNumber
-      MessageBox.alert('phone!',phoneNumber )
+      // alert(window.location.search);
+      // alert(window.location.href);
+      // let phoneNumber=this.$route.query.phoneNumber
+      // alert(window.location.hash);
+      var originUrl = location.search; //获取url中"?"符后的字串
+      var theRequest = {};
+      if (originUrl.indexOf("?") != -1) {
+        let str = originUrl.substr(1);
+        let strs = str.split("&");
+        for(let i = 0; i < strs.length; i ++) {
+          theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+        }
+      }
+
+      MessageBox.alert(theRequest.phoneNumber,'phone')
 
       this.openIndicator()
       console.log('home created')
