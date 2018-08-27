@@ -19,7 +19,7 @@
         <mt-button type="primary" class="row">我接收的</mt-button>
       </router-link>
       <!--<router-link v-else :to="{ name: 'MyRelease',params:{url:'/userPublish',title:'我接收的',filterParams:{}}}">-->
-        <!--<mt-button type="primary" class="row">我接收的</mt-button>-->
+      <!--<mt-button type="primary" class="row">我接收的</mt-button>-->
       <!--</router-link>-->
       <router-link :to="{ name: 'SumInfos',params:{url:'/userPublish/',title:'我接收的'}}">
         <mt-button type="primary" class="row">信息汇总</mt-button>
@@ -38,18 +38,19 @@
   import Header from './Header'
   import {
     Indicator,
-    Toast
-  } from 'mint-ui';
+    Toast,
+    MessageBox
+  } from 'mint-ui'
 
   export default {
     name: 'HelloWorld',
     components: {Header},
     data () {
       return {
-        id:'123',
+        id: '123',
         title: '软件信息管理',
         canSee: 'none',
-        releaseUser:true,
+        releaseUser: true,
         msg: 'Welcome to Your Vue.js App'
       }
     },
@@ -66,15 +67,18 @@
     },
     created () {
 
+      let phoneNumber=this.$route.query.phoneNumber
+      MessageBox.alert('phone!',phoneNumber )
+
       this.openIndicator()
-      console.log("home created")
-      this.userId='123'
+      console.log('home created')
+      this.userId = '123'
       this.$store.commit('upadateUserId', this.userId)
       // setTimeout("alert('对不起, 要你久候')", 3000 )
-      this.$store.commit('updateUrl','')
+      this.$store.commit('updateUrl', '')
     },
-    beforeDestroy() {
-      Indicator.close();
+    beforeDestroy () {
+      Indicator.close()
     }
   }
 </script>

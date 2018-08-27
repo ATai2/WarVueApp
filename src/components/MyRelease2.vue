@@ -162,6 +162,7 @@
 
       loadBottom () {
         let that = this
+
         axios({
           method: 'get',
           url: Global.serverSrc + that.url + that.userId,
@@ -199,6 +200,11 @@
         this.translate = translateNum.toFixed(2)
         this.moveTranslate = (1 + translateNum / 70).toFixed(2)
       },
+      getFilterParams(){
+        if (this.$route.params.filterParams) {
+          this.filterParams = this.$route.params.filterParams
+        }
+      },
 
       endLoad (datalist) {
         if (datalist.size() < this.pageNo) {
@@ -230,13 +236,16 @@
 
     created () {
       let statUrl = this.$store.state.url
-      if (statUrl == '') {
+      if (statUrl === '') {
         this.url = this.$route.params.url
         this.$store.commit('updateUrl', this.url)
       } else {
         this.url=statUrl
       }
       console.log(this.$route.params)
+
+
+
       if (this.$route.params.filterParams) {
         this.filterParams = this.$route.params.filterParams
       }

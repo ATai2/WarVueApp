@@ -78,6 +78,7 @@
       confirmFilter(){
         console.log('confirm')
         this.$router.push({ name: 'MyRelease2', params: { url:this.$route.params.url ,filterParams:this.fd}})
+        this.$store.commit('')
       },
       open (picker) {
         this.$refs[picker].open()
